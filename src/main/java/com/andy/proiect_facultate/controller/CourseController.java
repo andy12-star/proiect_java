@@ -1,0 +1,54 @@
+package com.andy.proiect_facultate.controller;
+
+import com.andy.proiect_facultate.entity.Course;
+import com.andy.proiect_facultate.service.api.CourseService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/courses")
+@Tag(name = "Course Controller", description = "API for managing students")
+public class CourseController {
+
+    private final CourseService courseService;
+
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
+
+    @GetMapping
+    @Operation(summary = "Get all courses", description = "Retrieve a list of all courses")
+    public ResponseEntity<List<Course>> getAllCourses() {
+        return ResponseEntity.ok(courseService.getAllCourses());
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get the course with a specific id: ", description = "Retrieve a course")
+    public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
+        return ResponseEntity.ok(courseService.getCourseById(id));
+    }
+
+    @PostMapping
+    @Operation(summary = "Add a new course", description = "Create a new course record")
+    public ResponseEntity<Course> addCourse(@RequestBody Course course) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseService.addCourse(course));
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update course details", description = "Update the details of an existing course")
+    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        return ResponseEntity.ok(courseService.updateCourse(id, course));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a course", description = "Delete a course record by ID")
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
+        return ResponseEntity.noContent().build();
+    }
+}
