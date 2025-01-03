@@ -4,6 +4,7 @@ import com.andy.proiect_facultate.entity.Grade;
 import com.andy.proiect_facultate.service.api.GradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class GradeController {
 
     @PostMapping
     @Operation(summary = "Add a new garde", description = "Create a new grade record")
-    public ResponseEntity<Grade> addGrade(@RequestBody Grade grade) {
+    public ResponseEntity<Grade> addGrade(@RequestBody @Valid Grade grade) {
         return ResponseEntity.status(HttpStatus.CREATED).body(gradeService.addGrade(grade));
     }
 
@@ -45,4 +46,11 @@ public class GradeController {
         gradeService.deleteGrade(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/students/{studentId}")
+    @Operation(summary = "Get grades for a student", description = "Retrieve all grades for a specific student")
+    public ResponseEntity<List<Grade>> getGradesForStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(gradeService.getGradesByStudentId(studentId));
+    }
+
 }

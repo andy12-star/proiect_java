@@ -1,12 +1,16 @@
 package com.andy.proiect_facultate.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -18,9 +22,10 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
-    @NotNull(message = "Course name is required")
+    @NotBlank(message = "Course name is required")
     private String courseName;
 
     @Min(value=1, message = "Credit value must be at least 1")
@@ -31,7 +36,12 @@ public class Course {
     @NotNull(message = "Professor is required")
     private Professor professor;
 
-    public int getId() {
+    @Future(message = "Exam date must be in the future")
+    @Column(name = "exam_date")
+    private LocalDate examDate;
+
+
+    public long getId() {
         return id;
     }
 
@@ -62,5 +72,13 @@ public class Course {
 
     public void setProfessor(@NotNull(message = "Professor is required") Professor professor) {
         this.professor = professor;
+    }
+
+    public LocalDate getExamDate() {
+        return examDate;
+    }
+
+    public void setExamDate(LocalDate examDate) {
+        this.examDate = examDate;
     }
 }

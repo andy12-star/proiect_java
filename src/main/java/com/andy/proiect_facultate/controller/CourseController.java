@@ -4,10 +4,12 @@ import com.andy.proiect_facultate.entity.Course;
 import com.andy.proiect_facultate.service.api.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -35,7 +37,7 @@ public class CourseController {
 
     @PostMapping
     @Operation(summary = "Add a new course", description = "Create a new course record")
-    public ResponseEntity<Course> addCourse(@RequestBody Course course) {
+    public ResponseEntity<Course> addCourse(@RequestBody @Valid Course course) {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.addCourse(course));
     }
 
@@ -51,4 +53,13 @@ public class CourseController {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}/schedule-exam")
+    @Operation(summary = "Schedule an exam", description = "Schedules an exam for a specific course")
+    public ResponseEntity<Course> scheduleExam(
+            @PathVariable Long id,
+            @RequestBody LocalDate examDate) {
+        return ResponseEntity.ok(courseService.scheduleExam(id, examDate));
+    }
+
 }

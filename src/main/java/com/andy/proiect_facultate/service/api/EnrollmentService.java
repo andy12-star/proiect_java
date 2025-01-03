@@ -15,4 +15,5 @@ public interface EnrollmentService {
 
     void deleteEnrollment(Long id);
 
+   public Enrollment enrollStudent(Long studentId, Long courseId);
 }

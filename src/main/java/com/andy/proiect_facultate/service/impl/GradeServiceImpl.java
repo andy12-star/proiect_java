@@ -44,4 +44,9 @@ public class GradeServiceImpl implements GradeService {
     public void deleteGrade(Long id) {
         gradeRepository.deleteById(id);
     }
+
+    @Override
+    public List<Grade> getGradesByStudentId(Long studentId) {
+            return gradeRepository.findByStudentId(studentId);
+    }
 }
