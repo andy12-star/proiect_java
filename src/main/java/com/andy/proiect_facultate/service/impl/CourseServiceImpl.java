@@ -5,6 +5,7 @@ import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.service.api.CourseService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -43,5 +44,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
+    }
+
+    @Override
+    public Course scheduleExam(Long id, LocalDate examDate) {
+            Course course = courseRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Course not found with ID: " + id));
+
+            course.setExamDate(examDate);
+            return courseRepository.save(course);
+
     }
 }

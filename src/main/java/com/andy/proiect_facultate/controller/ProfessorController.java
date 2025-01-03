@@ -4,6 +4,7 @@ import com.andy.proiect_facultate.entity.Professor;
 import com.andy.proiect_facultate.service.api.ProfessorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class ProfessorController {
 
     @PostMapping
     @Operation(summary = "Add a new professor", description = "Create a new professor record")
-    public ResponseEntity<Professor> addProfessor(@RequestBody Professor professor) {
+    public ResponseEntity<Professor> addProfessor(@RequestBody @Valid Professor professor) {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorService.addProfessor(professor));
     }
 

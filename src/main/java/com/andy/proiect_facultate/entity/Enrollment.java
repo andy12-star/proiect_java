@@ -1,6 +1,7 @@
 package com.andy.proiect_facultate.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,12 +18,14 @@ public class Enrollment {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "student is required")
     private Student student;
 
     @ManyToOne
+    @NotNull(message = "course is resuired")
     private Course course;
 
-    @NotNull
+    @NotBlank(message = "status is required")
     private String status;
 
     public Long getId() {

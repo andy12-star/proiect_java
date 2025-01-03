@@ -4,6 +4,7 @@ import com.andy.proiect_facultate.entity.Enrollment;
 import com.andy.proiect_facultate.service.api.EnrollmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/enrollments")
-@Tag(name = "enrollment Controller", description = "API for managing enrollments")
+@Tag(name = "Enrollment Controller", description = "API for managing enrollments")
 public class EnrollmentController {
 
     private final EnrollmentService enrollmentService;
@@ -29,7 +30,7 @@ public class EnrollmentController {
 
     @PostMapping
     @Operation(summary = "Add a new enrollment", description = "Create a new enrollment record")
-    public ResponseEntity<Enrollment> addEnrollment(@RequestBody Enrollment enrollment) {
+    public ResponseEntity<Enrollment> addEnrollment(@RequestBody @Valid Enrollment enrollment) {
         return ResponseEntity.status(HttpStatus.CREATED).body(enrollmentService.addEnrollment(enrollment));
     }
 
@@ -45,4 +46,13 @@ public class EnrollmentController {
         enrollmentService.deleteEnrollment(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/students/{studentId}/courses/{courseId}")
+    @Operation(summary = "Enroll a student in a course", description = "Enrolls a student in a specific course")
+    public ResponseEntity<Enrollment> enrollStudent(
+            @PathVariable Long studentId,
+            @PathVariable Long courseId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(enrollmentService.enrollStudent(studentId, courseId));
+    }
+
 }
