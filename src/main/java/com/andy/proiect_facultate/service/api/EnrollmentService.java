@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.entity.Enrollment;
+import com.andy.proiect_facultate.model.entity.Enrollment;
 
 import java.util.List;
 

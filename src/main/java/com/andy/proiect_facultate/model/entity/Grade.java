@@ -1,6 +1,8 @@
-package com.andy.proiect_facultate.entity;
+package com.andy.proiect_facultate.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,22 +13,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "enrollments")
-public class Enrollment {
+@Table(name="grades")
+public class Grade {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @NotNull(message = "student is required")
     private Student student;
 
     @ManyToOne
-    @NotNull(message = "course is resuired")
     private Course course;
 
-    @NotBlank(message = "status is required")
-    private String status;
+    @NotBlank(message = "grade value is required")
+    @Min(value = 1,message = "grade must be at least 1")
+    @Max(value = 10, message = "grade must be at most 10")
+    private Double grade;
 
     public Long getId() {
         return id;
@@ -52,11 +55,15 @@ public class Enrollment {
         this.course = course;
     }
 
-    public @NotNull String getStatus() {
-        return status;
+    public @NotNull Double getGrade() {
+        return grade;
     }
 
-    public void setStatus(@NotNull String status) {
-        this.status = status;
+    public void setGrade(@NotNull Double grade) {
+        this.grade = grade;
+    }
+
+    public Double getGradeValue() {
+        return grade;
     }
 }

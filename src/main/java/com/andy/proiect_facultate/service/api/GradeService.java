@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.entity.Grade;
+import com.andy.proiect_facultate.model.entity.Grade;
 
 import java.util.List;
 

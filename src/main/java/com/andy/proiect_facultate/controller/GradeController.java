@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
-import com.andy.proiect_facultate.entity.Grade;
+import com.andy.proiect_facultate.model.entity.Grade;
 import com.andy.proiect_facultate.service.api.GradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

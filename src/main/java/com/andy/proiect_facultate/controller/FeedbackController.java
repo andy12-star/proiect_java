@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
-import com.andy.proiect_facultate.entity.Feedback;
+import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.service.api.FeedbackService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

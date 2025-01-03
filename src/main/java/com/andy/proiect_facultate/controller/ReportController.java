@@ -1,7 +1,7 @@
 package com.andy.proiect_facultate.controller;
 
-import com.andy.proiect_facultate.dto.StudentReportDTO;
-import com.andy.proiect_facultate.dto.CourseReportDTO;
+import com.andy.proiect_facultate.model.dto.StudentReportDTO;
+import com.andy.proiect_facultate.model.dto.CourseReportDTO;
 import com.andy.proiect_facultate.service.api.ReportService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

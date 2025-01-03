@@ -1,4 +1,4 @@
-package com.andy.proiect_facultate.entity;
+package com.andy.proiect_facultate.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;

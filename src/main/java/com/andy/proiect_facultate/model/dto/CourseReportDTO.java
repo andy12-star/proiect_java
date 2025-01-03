@@ -1,4 +1,4 @@
-package com.andy.proiect_facultate.dto;
+package com.andy.proiect_facultate.model.dto;
 
 import java.util.List;
 

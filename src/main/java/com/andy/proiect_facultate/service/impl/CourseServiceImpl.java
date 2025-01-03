@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Course;
+import com.andy.proiect_facultate.model.entity.Course;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.service.api.CourseService;
 import org.springframework.stereotype.Service;

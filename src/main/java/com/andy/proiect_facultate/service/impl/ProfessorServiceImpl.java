@@ -1,9 +1,8 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Professor;
+import com.andy.proiect_facultate.model.entity.Professor;
 import com.andy.proiect_facultate.repository.ProfessorRepository;
 import com.andy.proiect_facultate.service.api.ProfessorService;
-import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.andy.proiect_facultate.entity;
+package com.andy.proiect_facultate.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,4 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String name; // Example: ROLE_ADMIN, ROLE_PROFESSOR, ROLE_STUDENT
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
 }

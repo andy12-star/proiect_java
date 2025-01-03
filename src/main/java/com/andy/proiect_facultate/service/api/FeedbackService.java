@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.entity.Feedback;
+import com.andy.proiect_facultate.model.entity.Feedback;
 
 import java.util.List;
 

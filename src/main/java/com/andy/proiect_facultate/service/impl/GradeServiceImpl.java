@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Grade;
+import com.andy.proiect_facultate.model.entity.Grade;
 import com.andy.proiect_facultate.repository.GradeRepository;
 import com.andy.proiect_facultate.service.api.GradeService;
 import org.springframework.stereotype.Service;
