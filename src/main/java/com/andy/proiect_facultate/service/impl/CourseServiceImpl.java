@@ -37,7 +37,9 @@ public class CourseServiceImpl implements CourseService {
         Course updatedCourse = getCourseById(id);
         updatedCourse.setCourseName(course.getCourseName());
         updatedCourse.setCredits(course.getCredits());
-        updatedCourse.setProfessor(course.getProfessor());
+        if (course.getProfessor() != null) {
+            updatedCourse.setProfessor(course.getProfessor());
+        }
         return courseRepository.save(updatedCourse);
     }
 

@@ -1,7 +1,9 @@
 package com.andy.proiect_facultate.security;
 
 import com.andy.proiect_facultate.config.JwtConfig;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
 
 @Component
@@ -17,9 +20,10 @@ public class JwtUtil {
 
     private final JwtConfig jwtConfig;
 
-    public String generateToken(String username) {
+    public String generateToken(String username, List<String> roles) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("roles", roles) // Add roles to the payload
                 .setIssuedAt(new Date())
                 .setExpiration(Timestamp.valueOf(LocalDateTime.now().plus(jwtConfig.getExpirationTime(), ChronoUnit.SECONDS)))
                 .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret())

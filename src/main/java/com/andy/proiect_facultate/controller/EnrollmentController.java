@@ -4,7 +4,6 @@ import com.andy.proiect_facultate.model.entity.Enrollment;
 import com.andy.proiect_facultate.service.api.EnrollmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +25,6 @@ public class EnrollmentController {
     @Operation(summary = "Get all enrollments", description = "Retrieve a list of all enrollments")
     public ResponseEntity<List<Enrollment>> getAllEnrollments() {
         return ResponseEntity.ok(enrollmentService.getAllEnrollments());
-    }
-
-    @PostMapping
-    @Operation(summary = "Add a new enrollment", description = "Create a new enrollment record")
-    public ResponseEntity<Enrollment> addEnrollment(@RequestBody @Valid Enrollment enrollment) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(enrollmentService.addEnrollment(enrollment));
     }
 
     @PutMapping("/{id}")

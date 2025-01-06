@@ -1,15 +1,15 @@
 package com.andy.proiect_facultate.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -21,49 +21,12 @@ public class Grade {
     private Long id;
 
     @ManyToOne
-    private Student student;
+    private User student;
 
     @ManyToOne
     private Course course;
 
-    @NotBlank(message = "grade value is required")
-    @Min(value = 1,message = "grade must be at least 1")
-    @Max(value = 10, message = "grade must be at most 10")
+    @NotNull(message = "grade value is required")
+    @Range(min = 1, max = 10, message = "Grade must be between 1 and 10")
     private Double grade;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public @NotNull Double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(@NotNull Double grade) {
-        this.grade = grade;
-    }
-
-    public Double getGradeValue() {
-        return grade;
-    }
 }

@@ -33,7 +33,7 @@ public class ReportServiceImpl implements ReportService {
 
         List<Grade> grades = gradeRepository.findByStudentId(studentId);
         List<String> courseNames = grades.stream().map(grade -> grade.getCourse().getCourseName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGradeValue).collect(Collectors.toList());
+        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
 
         return new StudentReportDTO(
                 student.getFirstName() + " " + student.getLastName(),
@@ -50,7 +50,7 @@ public class ReportServiceImpl implements ReportService {
 
         List<Grade> grades = gradeRepository.findByCourseId(courseId);
         List<String> studentNames = grades.stream().map(grade -> grade.getStudent().getFirstName() + " " + grade.getStudent().getLastName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGradeValue).collect(Collectors.toList());
+        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
 
         return new CourseReportDTO(
                 course.getCourseName(),

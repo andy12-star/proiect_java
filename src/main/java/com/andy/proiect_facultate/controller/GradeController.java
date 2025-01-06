@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.model.dto.request.AddGradeRequest;
 import com.andy.proiect_facultate.model.entity.Grade;
 import com.andy.proiect_facultate.service.api.GradeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,8 +31,12 @@ public class GradeController {
 
     @PostMapping
     @Operation(summary = "Add a new garde", description = "Create a new grade record")
-    public ResponseEntity<Grade> addGrade(@RequestBody @Valid Grade grade) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(gradeService.addGrade(grade));
+    public ResponseEntity<?> addGrade(@RequestBody @Valid AddGradeRequest addGradeRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(gradeService.addGrade(addGradeRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

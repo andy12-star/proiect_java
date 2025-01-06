@@ -1,10 +1,11 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.model.dto.request.CreateCourseRequest;
 import com.andy.proiect_facultate.model.entity.Course;
+import com.andy.proiect_facultate.repository.ProfessorRepository;
 import com.andy.proiect_facultate.service.api.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,11 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final ProfessorRepository professorRepository;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, ProfessorRepository professorRepository) {
         this.courseService = courseService;
+        this.professorRepository = professorRepository;
     }
 
     @GetMapping
@@ -37,7 +40,12 @@ public class CourseController {
 
     @PostMapping
     @Operation(summary = "Add a new course", description = "Create a new course record")
-    public ResponseEntity<Course> addCourse(@RequestBody @Valid Course course) {
+    public ResponseEntity<Course> addCourse(@RequestBody CreateCourseRequest createCourseRequest) {
+        Course course = Course.builder()
+                .courseName(createCourseRequest.getCourseName())
+                .credits(createCourseRequest.getCredits())
+                .professor(professorRepository.findById(createCourseRequest.getProfessorId()).orElse(null))
+                .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.addCourse(course));
     }
 

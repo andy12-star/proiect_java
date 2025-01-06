@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
+import com.andy.proiect_facultate.model.dto.request.AddGradeRequest;
 import com.andy.proiect_facultate.model.entity.Grade;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface GradeService {
 
     Grade getGradeById(Long id);
 
-    Grade addGrade(Grade grade);
+    Grade addGrade(AddGradeRequest addGradeRequest);
 
     Grade updateGrade(Long id,Double value);
 
