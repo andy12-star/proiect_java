@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
-import com.andy.proiect_facultate.model.dto.request.AddFeddbackRequest;
+import com.andy.proiect_facultate.model.dto.request.AddFeedbackRequest;
 import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.service.api.FeedbackService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,12 +25,8 @@ public class FeedbackController {
 
     @PostMapping
     @Operation(summary = "add feedback",description = "create a new feedback")
-    public ResponseEntity<?> addFeedback(@RequestBody @Valid AddFeddbackRequest addFeddbackRequest) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(addFeddbackRequest));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public ResponseEntity<Feedback> addFeedback(@RequestBody @Valid AddFeedbackRequest addFeedbackRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(addFeedbackRequest));
     }
 
     @GetMapping("/courses/{courseId}")

@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.model.dto.request.AddFeddbackRequest;
+import com.andy.proiect_facultate.model.dto.request.AddFeedbackRequest;
 import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.repository.FeedbackRepository;
@@ -30,14 +30,14 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 
     @Override
-    public Feedback addFeedback(AddFeddbackRequest addFeddbackRequest) {
+    public Feedback addFeedback(AddFeedbackRequest addFeedbackRequest) {
         Feedback feedback = Feedback.builder()
-                .student(studentRepository.findById(addFeddbackRequest.getStudentId())
+                .student(studentRepository.findById(addFeedbackRequest.getStudentId())
                         .orElseThrow(() -> new IllegalArgumentException("Student not found")))
-                .course(courseRepository.findById(addFeddbackRequest.getCourseId())
+                .course(courseRepository.findById(addFeedbackRequest.getCourseId())
                         .orElseThrow(() -> new IllegalArgumentException("Course not found")))
-                .comment(addFeddbackRequest.getComment())
-                .rating(addFeddbackRequest.getRating())
+                .comment(addFeedbackRequest.getComment())
+                .rating(addFeedbackRequest.getRating())
                 .build();
         return feedbackRepository.save(feedback);
     }

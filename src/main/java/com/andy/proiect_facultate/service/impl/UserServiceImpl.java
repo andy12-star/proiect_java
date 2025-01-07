@@ -22,22 +22,25 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterRequest registerRequest) {
         User user;
 
-        switch (registerRequest.getRole()) {
-            case STUDENT -> {
-                Student student = new Student();
-                student.setYear(registerRequest.getYear());
-                student.setSpecialization(registerRequest.getSpecialization());
-                user = student;
+        if (registerRequest.getRole() == null) {
+            throw new IllegalArgumentException("Invalid role: null");
+        } else {
+            switch (registerRequest.getRole()) {
+                case STUDENT -> {
+                    Student student = new Student();
+                    student.setYear(registerRequest.getYear());
+                    student.setSpecialization(registerRequest.getSpecialization());
+                    user = student;
+                }
+                case PROFESSOR -> {
+                    Professor professor = new Professor();
+                    professor.setDepartment(registerRequest.getDepartment());
+                    user = professor;
+                }
+                case ADMINISTRATOR -> user = new Administrator();
+                default -> throw new IllegalArgumentException("Invalid role: " + registerRequest.getRole());
             }
-            case PROFESSOR -> {
-                Professor professor = new Professor();
-                professor.setDepartment(registerRequest.getDepartment());
-                user = professor;
-            }
-            case ADMINISTRATOR -> user = new Administrator();
-            default -> throw new IllegalArgumentException("Invalid role: " + registerRequest.getRole());
         }
-
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());

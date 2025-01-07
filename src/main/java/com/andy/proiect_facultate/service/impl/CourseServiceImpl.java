@@ -52,7 +52,6 @@ public class CourseServiceImpl implements CourseService {
     public Course scheduleExam(Long id, LocalDate examDate) {
             Course course = courseRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Course not found with ID: " + id));
-
             course.setExamDate(examDate);
             return courseRepository.save(course);
 

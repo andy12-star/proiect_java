@@ -10,7 +10,7 @@ public class RegisterRequest {
     private String email;
     private String password;
     private RoleType role;
-    private Integer year; // Specific to students
-    private String specialization; // Specific to students
-    private String department; // Specific to professors
+    private Integer year;
+    private String specialization;
+    private String department;
 }

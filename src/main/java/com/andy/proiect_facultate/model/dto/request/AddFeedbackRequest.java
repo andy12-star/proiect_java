@@ -1,9 +1,11 @@
 package com.andy.proiect_facultate.model.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class AddFeddbackRequest {
+@AllArgsConstructor
+public class AddFeedbackRequest {
     private Long studentId;
     private Long courseId;
     private String comment;

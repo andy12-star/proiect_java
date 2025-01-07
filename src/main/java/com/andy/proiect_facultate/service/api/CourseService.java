@@ -17,5 +17,5 @@ public interface CourseService {
 
     void deleteCourse(Long id);
 
-    public Course scheduleExam(Long id, LocalDate examDate);
+    Course scheduleExam(Long id, LocalDate examDate);
 }

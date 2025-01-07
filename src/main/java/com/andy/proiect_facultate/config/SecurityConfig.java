@@ -2,7 +2,6 @@ package com.andy.proiect_facultate.config;
 
 import com.andy.proiect_facultate.security.CustomUserDetailsService;
 import com.andy.proiect_facultate.security.JwtAuthenticationFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
