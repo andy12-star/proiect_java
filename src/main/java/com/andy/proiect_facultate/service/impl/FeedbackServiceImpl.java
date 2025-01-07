@@ -1,8 +1,7 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Course;
-import com.andy.proiect_facultate.entity.Feedback;
-import com.andy.proiect_facultate.entity.Student;
+import com.andy.proiect_facultate.model.dto.request.AddFeedbackRequest;
+import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.repository.FeedbackRepository;
 import com.andy.proiect_facultate.repository.StudentRepository;
@@ -31,14 +30,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 
     @Override
-    public Feedback addFeedback(Feedback feedback) {
-        Student student = studentRepository.findById(feedback.getStudent().getId())
-                .orElseThrow(() -> new RuntimeException("Student not found"));
-        Course course = courseRepository.findById(feedback.getCourse().getId())
-                .orElseThrow(() -> new RuntimeException("Course not found"));
-
-        feedback.setStudent(student);
-        feedback.setCourse(course);
+    public Feedback addFeedback(AddFeedbackRequest addFeedbackRequest) {
+        Feedback feedback = Feedback.builder()
+                .student(studentRepository.findById(addFeedbackRequest.getStudentId())
+                        .orElseThrow(() -> new IllegalArgumentException("Student not found")))
+                .course(courseRepository.findById(addFeedbackRequest.getCourseId())
+                        .orElseThrow(() -> new IllegalArgumentException("Course not found")))
+                .comment(addFeedbackRequest.getComment())
+                .rating(addFeedbackRequest.getRating())
+                .build();
         return feedbackRepository.save(feedback);
     }
 

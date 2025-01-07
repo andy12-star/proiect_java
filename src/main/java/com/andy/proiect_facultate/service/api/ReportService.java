@@ -1,7 +1,7 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.dto.StudentReportDTO;
-import com.andy.proiect_facultate.dto.CourseReportDTO;
+import com.andy.proiect_facultate.model.dto.StudentReportDTO;
+import com.andy.proiect_facultate.model.dto.CourseReportDTO;
 
 public interface ReportService {
 

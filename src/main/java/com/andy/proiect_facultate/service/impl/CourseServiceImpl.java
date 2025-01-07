@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Course;
+import com.andy.proiect_facultate.model.entity.Course;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.service.api.CourseService;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,9 @@ public class CourseServiceImpl implements CourseService {
         Course updatedCourse = getCourseById(id);
         updatedCourse.setCourseName(course.getCourseName());
         updatedCourse.setCredits(course.getCredits());
-        updatedCourse.setProfessor(course.getProfessor());
+        if (course.getProfessor() != null) {
+            updatedCourse.setProfessor(course.getProfessor());
+        }
         return courseRepository.save(updatedCourse);
     }
 
@@ -50,7 +52,6 @@ public class CourseServiceImpl implements CourseService {
     public Course scheduleExam(Long id, LocalDate examDate) {
             Course course = courseRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Course not found with ID: " + id));
-
             course.setExamDate(examDate);
             return courseRepository.save(course);
 

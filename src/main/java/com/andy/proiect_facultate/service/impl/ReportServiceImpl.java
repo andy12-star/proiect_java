@@ -1,10 +1,10 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.dto.CourseReportDTO;
-import com.andy.proiect_facultate.dto.StudentReportDTO;
-import com.andy.proiect_facultate.entity.Course;
-import com.andy.proiect_facultate.entity.Grade;
-import com.andy.proiect_facultate.entity.Student;
+import com.andy.proiect_facultate.model.dto.CourseReportDTO;
+import com.andy.proiect_facultate.model.dto.StudentReportDTO;
+import com.andy.proiect_facultate.model.entity.Course;
+import com.andy.proiect_facultate.model.entity.Grade;
+import com.andy.proiect_facultate.model.entity.Student;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.repository.GradeRepository;
 import com.andy.proiect_facultate.repository.StudentRepository;
@@ -33,7 +33,7 @@ public class ReportServiceImpl implements ReportService {
 
         List<Grade> grades = gradeRepository.findByStudentId(studentId);
         List<String> courseNames = grades.stream().map(grade -> grade.getCourse().getCourseName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGradeValue).collect(Collectors.toList());
+        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
 
         return new StudentReportDTO(
                 student.getFirstName() + " " + student.getLastName(),
@@ -50,7 +50,7 @@ public class ReportServiceImpl implements ReportService {
 
         List<Grade> grades = gradeRepository.findByCourseId(courseId);
         List<String> studentNames = grades.stream().map(grade -> grade.getStudent().getFirstName() + " " + grade.getStudent().getLastName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGradeValue).collect(Collectors.toList());
+        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
 
         return new CourseReportDTO(
                 course.getCourseName(),

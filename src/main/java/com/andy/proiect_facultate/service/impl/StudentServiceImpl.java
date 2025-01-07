@@ -1,9 +1,8 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Student;
+import com.andy.proiect_facultate.model.entity.Student;
 import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.StudentService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

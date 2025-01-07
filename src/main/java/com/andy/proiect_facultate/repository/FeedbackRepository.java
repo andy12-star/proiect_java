@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.repository;
 
-import com.andy.proiect_facultate.entity.Feedback;
+import com.andy.proiect_facultate.model.entity.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

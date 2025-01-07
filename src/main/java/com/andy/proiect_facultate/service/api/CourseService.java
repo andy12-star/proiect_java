@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.entity.Course;
+import com.andy.proiect_facultate.model.entity.Course;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,5 +17,5 @@ public interface CourseService {
 
     void deleteCourse(Long id);
 
-    public Course scheduleExam(Long id, LocalDate examDate);
+    Course scheduleExam(Long id, LocalDate examDate);
 }

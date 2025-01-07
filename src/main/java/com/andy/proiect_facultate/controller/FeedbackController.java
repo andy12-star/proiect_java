@@ -1,6 +1,7 @@
 package com.andy.proiect_facultate.controller;
 
-import com.andy.proiect_facultate.entity.Feedback;
+import com.andy.proiect_facultate.model.dto.request.AddFeedbackRequest;
+import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.service.api.FeedbackService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,8 +25,8 @@ public class FeedbackController {
 
     @PostMapping
     @Operation(summary = "add feedback",description = "create a new feedback")
-    public ResponseEntity<Feedback> addFeedback(@RequestBody @Valid  Feedback feedback) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(feedback));
+    public ResponseEntity<Feedback> addFeedback(@RequestBody @Valid AddFeedbackRequest addFeedbackRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(addFeedbackRequest));
     }
 
     @GetMapping("/courses/{courseId}")
@@ -36,7 +37,11 @@ public class FeedbackController {
 
     @GetMapping("/students/{studentId}")
     @Operation(summary = "get feedback by student")
-    public ResponseEntity<List<Feedback>> getFeedbackByStudent(@PathVariable Long studentId) {
-        return ResponseEntity.ok(feedbackService.getFeedbackByStudent(studentId));
+    public ResponseEntity<?> getFeedbackByStudent(@PathVariable Long studentId) {
+        try {
+            return ResponseEntity.ok(feedbackService.getFeedbackByStudent(studentId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

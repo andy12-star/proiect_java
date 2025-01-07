@@ -1,8 +1,8 @@
 package com.andy.proiect_facultate.service.impl;
 
-import com.andy.proiect_facultate.entity.Course;
-import com.andy.proiect_facultate.entity.Enrollment;
-import com.andy.proiect_facultate.entity.Student;
+import com.andy.proiect_facultate.model.entity.Course;
+import com.andy.proiect_facultate.model.entity.Enrollment;
+import com.andy.proiect_facultate.model.entity.Student;
 import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.repository.EnrollmentRepository;
 import com.andy.proiect_facultate.repository.StudentRepository;

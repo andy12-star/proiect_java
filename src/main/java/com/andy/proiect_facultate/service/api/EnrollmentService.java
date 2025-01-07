@@ -1,6 +1,6 @@
 package com.andy.proiect_facultate.service.api;
 
-import com.andy.proiect_facultate.entity.Enrollment;
+import com.andy.proiect_facultate.model.entity.Enrollment;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface EnrollmentService {
 
     void deleteEnrollment(Long id);
 
-   public Enrollment enrollStudent(Long studentId, Long courseId);
+    Enrollment enrollStudent(Long studentId, Long courseId);
 }
