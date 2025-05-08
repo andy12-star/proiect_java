@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.GradeController;
 import com.andy.proiect_facultate.model.dto.request.AddGradeRequest;
 import com.andy.proiect_facultate.model.entity.Grade;
 import com.andy.proiect_facultate.security.CustomUserDetailsService;

@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.ReportController;
 import com.andy.proiect_facultate.model.dto.CourseReportDTO;
 import com.andy.proiect_facultate.model.dto.StudentReportDTO;
 import com.andy.proiect_facultate.security.CustomUserDetailsService;

@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.CourseController;
 import com.andy.proiect_facultate.model.dto.request.CreateCourseRequest;
 import com.andy.proiect_facultate.model.entity.Course;
 import com.andy.proiect_facultate.model.entity.Professor;

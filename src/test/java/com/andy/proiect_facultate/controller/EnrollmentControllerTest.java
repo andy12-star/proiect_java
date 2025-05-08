@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.EnrollmentController;
 import com.andy.proiect_facultate.model.entity.Enrollment;
 import com.andy.proiect_facultate.security.CustomUserDetailsService;
 import com.andy.proiect_facultate.security.JwtAuthenticationFilter;

@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.FeedbackController;
 import com.andy.proiect_facultate.model.dto.request.AddFeedbackRequest;
 import com.andy.proiect_facultate.model.entity.Feedback;
 import com.andy.proiect_facultate.security.CustomUserDetailsService;

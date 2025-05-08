@@ -25,3 +25,8 @@ logging:
     org:
       springframework: ERROR
       hibernate: ERROR
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-message: always

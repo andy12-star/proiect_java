@@ -1,5 +1,6 @@
 package com.andy.proiect_facultate.controller;
 
+import com.andy.proiect_facultate.controller.API.ProfessorController;
 import com.andy.proiect_facultate.model.entity.Professor;
 import com.andy.proiect_facultate.model.enums.RoleType;
 import com.andy.proiect_facultate.security.CustomUserDetailsService;

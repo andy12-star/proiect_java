@@ -1,4 +1,4 @@
-package com.andy.proiect_facultate.controller;
+package com.andy.proiect_facultate.controller.API;
 
 import com.andy.proiect_facultate.model.dto.request.AddGradeRequest;
 import com.andy.proiect_facultate.model.entity.Grade;
