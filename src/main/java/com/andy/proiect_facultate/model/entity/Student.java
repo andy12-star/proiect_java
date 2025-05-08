@@ -7,10 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
