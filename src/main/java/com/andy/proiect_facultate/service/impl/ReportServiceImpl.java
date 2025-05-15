@@ -9,25 +9,24 @@ import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.repository.GradeRepository;
 import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.ReportService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class ReportServiceImpl implements ReportService {
     private final GradeRepository gradeRepository;
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
-    public ReportServiceImpl(GradeRepository gradeRepository, StudentRepository studentRepository, CourseRepository courseRepository) {
-        this.gradeRepository = gradeRepository;
-        this.studentRepository = studentRepository;
-        this.courseRepository = courseRepository;
-    }
-
     @Override
     public StudentReportDTO generateStudentReport(Long studentId) {
+        log.info("Generating report for student {}", studentId);
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
@@ -45,6 +44,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public CourseReportDTO generateCourseReport(Long courseId) {
+        log.info("Generating report for course {}", courseId);
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 

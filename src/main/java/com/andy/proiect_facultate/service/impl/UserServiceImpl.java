@@ -8,11 +8,13 @@ import com.andy.proiect_facultate.model.entity.User;
 import com.andy.proiect_facultate.repository.UserRepository;
 import com.andy.proiect_facultate.service.api.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -20,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(RegisterRequest registerRequest) {
+        log.info("Registering user: {}", registerRequest);
         User user;
 
         if (registerRequest.getRole() == null) {
