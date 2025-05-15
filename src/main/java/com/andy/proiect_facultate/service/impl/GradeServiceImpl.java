@@ -8,6 +8,8 @@ import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.GradeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,5 +68,10 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getGradesByStudentId(Long studentId) {
         log.info("Getting grades by studentId: {}", studentId);
             return gradeRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public Page<Grade> getGradesPage(Pageable pageable) {
+        return gradeRepository.findAll(pageable);
     }
 }

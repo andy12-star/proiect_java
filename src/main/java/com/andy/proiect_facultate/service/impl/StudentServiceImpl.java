@@ -5,6 +5,8 @@ import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,5 +54,10 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudent(Long id) {
         log.info("Deleting student: {}", id);
         studentRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Student> getStudentsPage(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 }

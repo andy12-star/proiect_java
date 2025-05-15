@@ -9,6 +9,8 @@ import com.andy.proiect_facultate.repository.UserRepository;
 import com.andy.proiect_facultate.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +53,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> getUsersPage(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 }

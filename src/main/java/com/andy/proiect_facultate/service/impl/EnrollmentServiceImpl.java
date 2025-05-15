@@ -9,6 +9,8 @@ import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.EnrollmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,6 +71,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setStatus("Pending");
 
         return enrollmentRepository.save(enrollment);
+    }
+
+    @Override
+    public Page<Enrollment> getEnrollmentsPage(Pageable pageable) {
+        return enrollmentRepository.findAll(pageable);
     }
 
 }

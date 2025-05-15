@@ -5,6 +5,8 @@ import com.andy.proiect_facultate.repository.ProfessorRepository;
 import com.andy.proiect_facultate.service.api.ProfessorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +52,10 @@ public class ProfessorServiceImpl implements ProfessorService {
     public void deleteProfessor(Long id) {
         log.info("Delete professor {}", id);
         professorRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Professor> getProfessorsPage(Pageable pageable) {
+        return professorRepository.findAll(pageable);
     }
 }

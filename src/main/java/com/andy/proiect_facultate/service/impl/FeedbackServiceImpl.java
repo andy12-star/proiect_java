@@ -8,6 +8,8 @@ import com.andy.proiect_facultate.repository.StudentRepository;
 import com.andy.proiect_facultate.service.api.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +54,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<Feedback> getFeedbackForCourse(Long courseId) {
         log.info("Getting feedbacks by course with id {}", courseId);
         return feedbackRepository.findByCourseId(courseId);
+    }
+
+    @Override
+    public Page<Feedback> getFeedbackPage(Pageable pageable) {
+        return feedbackRepository.findAll(pageable);
     }
 
     @Override

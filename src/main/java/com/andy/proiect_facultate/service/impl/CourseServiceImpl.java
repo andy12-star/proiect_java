@@ -5,6 +5,8 @@ import com.andy.proiect_facultate.repository.CourseRepository;
 import com.andy.proiect_facultate.service.api.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -61,5 +63,10 @@ public class CourseServiceImpl implements CourseService {
             course.setExamDate(examDate);
             return courseRepository.save(course);
 
+    }
+
+    @Override
+    public Page<Course> getCoursesPage(Pageable pageable) {
+        return courseRepository.findAll(pageable);
     }
 }
