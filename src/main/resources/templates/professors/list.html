@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Professors</title>
+</head>
+<body>
+<h1>Professor List</h1>
+<a href="/view/professors/new">Add Professor</a>
+<ul>
+    <li th:each="professor : ${professors}">
+        <a th:href="@{/view/professors/{id}(id=${professor.id})}"
+           th:text="${professor.firstName} + ' ' + ${professor.lastName}"></a>
+    </li>
+</ul>
+</body>
+
+</html>

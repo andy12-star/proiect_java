@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Report</title>
+</head>
+<body>
+<h1>Student Report</h1>
+
+<p><strong>Student Name:</strong> <span th:text="${studentReport.studentName}"></span></p>
+<p><strong>Email:</strong> <span th:text="${studentReport.email}"></span></p>
+
+<h3>Courses & Grades</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Course</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i : ${#numbers.sequence(0, studentReport.courseNames.size() - 1)}">
+        <td th:text="${studentReport.courseNames[i]}"></td>
+        <td th:text="${studentReport.grades[i]}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+</body>
+</html>

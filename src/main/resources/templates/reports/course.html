@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Report</title>
+</head>
+<body>
+<h1>Course Report</h1>
+
+<p><strong>Course Name:</strong> <span th:text="${courseReport.courseName}"></span></p>
+
+<h3>Students & Grades</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Student</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i : ${#numbers.sequence(0, courseReport.studentNames.size() - 1)}">
+        <td th:text="${courseReport.studentNames[i]}"></td>
+        <td th:text="${courseReport.grades[i]}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+</body>
+</html>

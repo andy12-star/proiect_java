@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Details</title>
+</head>
+<body>
+<h1 th:text="${course.courseName}"></h1>
+<p>Credits: <span th:text="${course.credits}"></span></p>
+<p>Professor: <span th:text="${course.professor.firstName + ' ' + course.professor.lastName}"></span></p>
+
+<a th:href="@{'/view/courses/update/' + ${course.id}}">Edit</a>
+
+<form th:action="@{'/view/courses/delete/' + ${course.id}}" method="post">
+    <button type="submit">Delete</button>
+</form>
+
+<a th:href="@{/view/courses}">Back to list</a>
+</body>
+</html>

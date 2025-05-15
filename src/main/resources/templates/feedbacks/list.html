@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedbacks</title>
+</head>
+<body>
+<h1>Feedbacks List</h1>
+
+<a th:href="@{/view/feedbacks/add}">Add Feedback</a>
+<br/><br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Course</th>
+        <th>Rating</th>
+        <th>Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="feedback : ${feedbacks}">
+        <td th:text="${feedback.id}"></td>
+        <td th:text="${feedback.student != null ? feedback.student.firstName + ' ' + feedback.student.lastName : 'N/A'}"></td>
+        <td th:text="${feedback.course != null ? feedback.course.courseName : 'N/A'}"></td>
+        <td th:text="${feedback.rating}"></td>
+        <td th:text="${feedback.comment}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Enrollment</title>
+</head>
+<body>
+<h1>Update Enrollment Status</h1>
+
+<form th:action="@{/view/enrollments/update/{id}(id=${enrollment.id})}" method="post">
+    <label>Status:</label>
+    <input type="text" name="status" th:value="${enrollment.status}" required/>
+    <br/><br/>
+
+    <button type="submit">Update</button>
+</form>
+
+<br/>
+<a th:href="@{/view/enrollments}">Back to list</a>
+</body>
+</html>

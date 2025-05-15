@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enrollments</title>
+</head>
+<body>
+<h1>Enrollments List</h1>
+
+<a th:href="@{/view/enrollments/add}">Add Enrollment</a>
+<br/><br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Course</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="enrollment : ${enrollments}">
+        <td th:text="${enrollment.id}"></td>
+        <td th:text="${enrollment.student != null ? enrollment.student.firstName + ' ' + enrollment.student.lastName : 'N/A'}"></td>
+        <td th:text="${enrollment.course != null ? enrollment.course.courseName : 'N/A'}"></td>
+        <td th:text="${enrollment.status}"></td>
+        <td>
+            <a th:href="@{/view/enrollments/update/{id}(id=${enrollment.id})}">Edit</a> |
+            <a th:href="@{/view/enrollments/delete/{id}(id=${enrollment.id})}"
+               onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

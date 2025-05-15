@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Professor Details</title>
+</head>
+<body>
+<h2 th:text="${professor.firstName} + ' ' + ${professor.lastName}"></h2>
+<p>Email: <span th:text="${professor.email}"></span></p>
+<p>Department: <span th:text="${professor.department}"></span></p>
+<td>
+    <a th:href="@{'/view/professors/update/' + ${professor.id}}">Edit</a>
+</td>
+<br>
+<br>
+<a href="/view/professors">Back to list</a>
+</body>
+</html>

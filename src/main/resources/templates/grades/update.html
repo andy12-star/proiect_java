@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Grade</title>
+</head>
+<body>
+<h1>Edit Grade</h1>
+
+<form th:action="@{/view/grades/update/{id}(id=${grade.id})}" method="post">
+    <label for="gradeValue">Grade:</label>
+    <input type="number" step="0.01" min="1" max="10" name="gradeValue" th:value="${grade.grade}" required/>
+    <br/>
+    <button type="submit">Update</button>
+</form>
+
+<br/>
+<a th:href="@{/view/grades}">Back to Grades</a>
+</body>
+</html>

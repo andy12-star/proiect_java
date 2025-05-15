@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Grade</title>
+</head>
+<body>
+<h1>Add Grade</h1>
+
+<form th:action="@{/view/grades/add}" th:object="${grade}" method="post">
+    <label>Student:</label>
+    <select th:field="*{student.id}">
+        <option th:each="student : ${students}"
+                th:value="${student.id}"
+                th:text="${student.firstName + ' ' + student.lastName}">Student
+        </option>
+    </select>
+    <br><br>
+
+    <label>Course:</label>
+    <select th:field="*{course.id}">
+        <option th:each="course : ${courses}"
+                th:value="${course.id}"
+                th:text="${course.courseName}">Course
+        </option>
+    </select>
+    <br><br>
+
+    <label>Grade:</label>
+    <input type="number" step="0.01" th:field="*{grade}"/>
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<br/>
+<a th:href="@{/view/grades}">Back to list</a>
+<a>NU MERGE</a>
+</body>
+</html>
