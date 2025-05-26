@@ -20,5 +20,3 @@ spring:
       prefer-ip-address: true
       instance-id: feedback-service:8083
 
-  server:
-    port: 8081

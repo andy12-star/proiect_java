@@ -20,5 +20,3 @@ spring:
       prefer-ip-address: true
       instance-id: grade-service:8084
 
-  server:
-    port: 8081

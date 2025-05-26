@@ -19,6 +19,3 @@ spring:
     instance:
       prefer-ip-address: true
       instance-id: professor-service:8085
-
-  server:
-    port: 8081

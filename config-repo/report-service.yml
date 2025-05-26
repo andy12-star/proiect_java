@@ -19,6 +19,3 @@ spring:
     instance:
       prefer-ip-address: true
       instance-id: report-service:8086
-
-  server:
-    port: 8081
