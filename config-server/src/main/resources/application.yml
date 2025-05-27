@@ -8,6 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/username/config-repo
-          search-paths:
-            - config-repo
+          uri: https://github.com/andy12-star/proiect_java/tree/phase_2/config-server
+          default-label: main

@@ -8,6 +8,6 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/andreeaionita/config-repo
+          uri: https://github.com/andy12-star/proiect_java/tree/phase_2/config-repo
           search-paths:
             - .
