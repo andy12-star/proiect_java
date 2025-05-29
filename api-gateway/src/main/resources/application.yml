@@ -23,6 +23,10 @@ spring:
           uri: lb://grade-service
           predicates:
             - Path=/api/grades/**
+        - id: enrollment-service
+          uri: lb://enrollment-grade
+          predicates:
+            - Path=/api/enrollments/**
 
 eureka:
   client:
