@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
       discovery:
@@ -11,22 +12,22 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: course-service
-          uri: lb://course-service
-          predicates:
-            - Path=/api/courses/**
         - id: student-service
           uri: lb://student-service
           predicates:
             - Path=/api/students/**
-        - id: grade-service
-          uri: lb://grade-service
+        - id: course-service
+          uri: lb://course-service
           predicates:
-            - Path=/api/grades/**
+            - Path=/api/courses/**
         - id: enrollment-service
-          uri: lb://enrollment-grade
+          uri: lb://enrollment-service
           predicates:
             - Path=/api/enrollments/**
+        - id: feedback-service
+          uri: lb://feedback-service
+          predicates:
+            - Path=/api/feedback-service/**
 
 eureka:
   client:

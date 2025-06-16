@@ -8,6 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/andy12-star/proiect_java
-          search-paths:
-            - config-repo
+          uri: file:/Users/andreeaionita/Developer/master/java facultate/proiect_facultate/config-repo
+          clone-on-start: true
