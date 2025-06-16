@@ -1,5 +1,4 @@
-package studentservice.model;
-
+package studentservice.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -7,11 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Range;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "students")
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
@@ -28,11 +28,12 @@ public class Student {
     @Email
     @NotBlank
     private String email;
+
     @Column(name = "study_year")
-    @Range(min = 1, max = 5)
     private int studyYear;
 
 
     @NotBlank
     private String specialization;
 }
+

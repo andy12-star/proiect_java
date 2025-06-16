@@ -2,7 +2,7 @@ package studentservice.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import studentservice.model.Student;
+import studentservice.entity.Student;
 
 import java.util.List;
 

@@ -5,17 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import studentservice.model.Student;
+import studentservice.entity.Student;
 import studentservice.repository.StudentRepository;
 
 import java.util.List;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class StudentServiceImpl implements StudentService {
 
-    private final StudentRepository studentRepository;
+    public final StudentRepository studentRepository;
 
     @Override
     public List<Student> getAllStudents() {

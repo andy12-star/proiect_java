@@ -13,13 +13,13 @@
         <module>api-gateway</module>
         <module>config-server</module>
         <module>discovery-service</module>
-        <module>student-service</module>
         <module>course-service</module>
         <module>enrollment-service</module>
         <module>grade-service</module>
         <module>feedback-service</module>
         <module>professor-service</module>
         <module>report-service</module>
+        <module>student-service</module>
 
     </modules>
 
