@@ -1,4 +1,4 @@
-package studentservice.entity;
+package professorservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.validator.constraints.Range;
 import userservice.model.User;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,11 +16,8 @@ import userservice.model.User;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "students")
-public class Student extends User {
-    @Range(min = 1, max = 5)
-    private int year;
-
+@Table(name = "professors")
+public class Professor extends User {
     @NotBlank
-    private String specialization;
+    private String department;
 }
