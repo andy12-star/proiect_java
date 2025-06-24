@@ -1,5 +1,6 @@
-package userservice.model;
+package authservice.dto.request;
 
+import authservice.enums.RoleType;
 import lombok.Data;
 
 @Data

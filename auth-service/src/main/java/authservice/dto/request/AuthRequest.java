@@ -1,4 +1,4 @@
-package userservice.model;
+package authservice.dto.request;
 
 import lombok.Data;
 

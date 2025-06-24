@@ -60,4 +60,3 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return enrollmentRepository.findAll(pageable);
     }
 }
-}

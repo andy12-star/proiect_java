@@ -6,28 +6,58 @@ spring:
     name: api-gateway
 
   cloud:
+    config:
+      uri: http://localhost:8888
+
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+
       routes:
         - id: student-service
           uri: lb://student-service
           predicates:
-            - Path=/api/students/**
+            - Path=/students/**
+
         - id: course-service
           uri: lb://course-service
           predicates:
-            - Path=/api/courses/**
+            - Path=/courses/**
+
+        - id: professor-service
+          uri: lb://professor-service
+          predicates:
+            - Path=/professors/**
+
         - id: enrollment-service
           uri: lb://enrollment-service
           predicates:
-            - Path=/api/enrollments/**
+            - Path=/enrollments/**
+
+        - id: grade-service
+          uri: lb://grade-service
+          predicates:
+            - Path=/grades/**
+
         - id: feedback-service
           uri: lb://feedback-service
           predicates:
-            - Path=/api/feedback-service/**
+            - Path=/feedbacks/**
+
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
+        - id: report-service
+          uri: lb://report-service
+          predicates:
+            - Path=/reports/**
+
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   client:

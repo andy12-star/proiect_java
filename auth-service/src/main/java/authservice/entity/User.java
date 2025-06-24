@@ -1,44 +1,34 @@
-package userservice.model;
+package authservice.entity;
 
+import authservice.enums.RoleType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z-' ]+$")
     private String firstName;
 
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z-' ]+$")
     private String lastName;
 
-    @Email
-    @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, length = 100)
     private String email;
 
-    @NotBlank
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
     private RoleType role;
 }

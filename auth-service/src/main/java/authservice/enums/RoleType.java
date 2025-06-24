@@ -1,4 +1,4 @@
-package userservice.model;
+package authservice.enums;
 
 public enum RoleType {
     STUDENT,
