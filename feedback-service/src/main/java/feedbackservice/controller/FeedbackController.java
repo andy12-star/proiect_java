@@ -1,7 +1,7 @@
 package feedbackservice.controller;
 
+import feedbackservice.model.AddFeedbackRequest;
 import feedbackservice.model.Feedback;
-import feedbackservice.model.FeedbackRequest;
 import feedbackservice.service.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,7 @@ public class FeedbackController {
     private final FeedbackService feedbackService;
 
     @PostMapping
-    public ResponseEntity<Feedback> addFeedback(@RequestBody FeedbackRequest request) {
+    public ResponseEntity<Feedback> addFeedback(@RequestBody AddFeedbackRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(feedbackService.addFeedback(request));
     }
 

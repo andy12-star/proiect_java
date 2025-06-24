@@ -1,9 +1,11 @@
 package gradeservice.controller;
 
+import gradeservice.model.AddGradeRequest;
 import gradeservice.model.Grade;
-import gradeservice.model.GradeRequest;
 import gradeservice.service.GradeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/grades")
+@RequestMapping("/grades")
 @RequiredArgsConstructor
+@Slf4j
 public class GradeController {
 
     private final GradeService gradeService;
@@ -27,11 +30,11 @@ public class GradeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addGrade(@RequestBody GradeRequest request) {
+    public ResponseEntity<?> addGrade(@RequestBody @Valid AddGradeRequest request) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(gradeService.addGrade(request));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -52,9 +55,11 @@ public class GradeController {
     }
 
     @GetMapping("/page")
-    public ResponseEntity<Page<Grade>> getGradesPage(@RequestParam(defaultValue = "0") int page,
-                                                     @RequestParam(defaultValue = "5") int size,
-                                                     @RequestParam(defaultValue = "id") String sortBy) {
+    public ResponseEntity<Page<Grade>> getGradesPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return ResponseEntity.ok(gradeService.getGradesPage(pageable));
     }

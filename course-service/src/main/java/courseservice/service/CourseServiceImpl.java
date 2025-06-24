@@ -3,16 +3,18 @@ package courseservice.service;
 import courseservice.model.Course;
 import courseservice.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CourseServiceImpl implements CourseService {
+
     private final CourseRepository courseRepository;
 
     @Override
@@ -23,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getCourseById(Long id) {
         return courseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Course with id: " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
     @Override
@@ -33,13 +35,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course updateCourse(Long id, Course course) {
-        Course updated = getCourseById(id);
-        updated.setCourseName(course.getCourseName());
-        updated.setCredits(course.getCredits());
+        Course existing = getCourseById(id);
+        existing.setCourseName(course.getCourseName());
+        existing.setCredits(course.getCredits());
         if (course.getProfessorId() != null) {
-            updated.setProfessorId(course.getProfessorId());
+            existing.setProfessorId(course.getProfessorId());
         }
-        return courseRepository.save(updated);
+        return courseRepository.save(existing);
     }
 
     @Override

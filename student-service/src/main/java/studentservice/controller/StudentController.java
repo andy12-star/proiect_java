@@ -2,26 +2,26 @@ package studentservice.controller;
 
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import studentservice.entity.Student;
 import studentservice.service.StudentService;
 
 import java.util.List;
-
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/students")
+@RequiredArgsConstructor
+@Slf4j
 public class StudentController {
 
     private final StudentService studentService;
-
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {
@@ -34,12 +34,12 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody @Valid Student student) {
-        return ResponseEntity.ok(studentService.addStudent(student));
+    public ResponseEntity<Student> addStudent(@Valid @RequestBody Student student) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(student));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody @Valid Student student) {
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 

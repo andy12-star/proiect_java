@@ -1,9 +1,11 @@
 package courseservice.controller;
 
 import courseservice.model.Course;
-import courseservice.model.dto.CourseRequest;
+import courseservice.model.dto.CreateCourseRequest;
 import courseservice.service.CourseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +18,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@RequestMapping("/courses")
 @RequiredArgsConstructor
-@RequestMapping("/api/courses")
+@Slf4j
 public class CourseController {
 
     private final CourseService courseService;
@@ -33,11 +36,11 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> addCourse(@RequestBody CourseRequest request) {
+    public ResponseEntity<Course> addCourse(@RequestBody @Valid CreateCourseRequest req) {
         Course course = Course.builder()
-                .courseName(request.getCourseName())
-                .credits(request.getCredits())
-                .professorId(request.getProfessorId())
+                .courseName(req.getCourseName())
+                .credits(req.getCredits())
+                .professorId(req.getProfessorId())
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.addCourse(course));
     }
@@ -54,14 +57,17 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/schedule-exam")
-    public ResponseEntity<Course> scheduleExam(@PathVariable Long id, @RequestBody LocalDate examDate) {
+    public ResponseEntity<Course> scheduleExam(
+            @PathVariable Long id,
+            @RequestBody LocalDate examDate) {
         return ResponseEntity.ok(courseService.scheduleExam(id, examDate));
     }
 
     @GetMapping("/page")
-    public ResponseEntity<Page<Course>> getCoursesPage(@RequestParam(defaultValue = "0") int page,
-                                                       @RequestParam(defaultValue = "5") int size,
-                                                       @RequestParam(defaultValue = "id") String sortBy) {
+    public ResponseEntity<Page<Course>> getCoursesPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return ResponseEntity.ok(courseService.getCoursesPage(pageable));
     }

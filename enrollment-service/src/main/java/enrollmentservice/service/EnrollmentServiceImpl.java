@@ -3,14 +3,16 @@ package enrollmentservice.service;
 import enrollmentservice.model.Enrollment;
 import enrollmentservice.repository.EnrollmentRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     private final EnrollmentRepository enrollmentRepository;
@@ -23,7 +25,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public Enrollment getEnrollmentById(Long id) {
         return enrollmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Enrollment with id " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Enrollment not found"));
     }
 
     @Override
@@ -33,9 +35,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public Enrollment updateEnrollment(Long id, String status) {
-        Enrollment enrollment = getEnrollmentById(id);
-        enrollment.setStatus(status);
-        return enrollmentRepository.save(enrollment);
+        Enrollment existing = getEnrollmentById(id);
+        existing.setStatus(status);
+        return enrollmentRepository.save(existing);
     }
 
     @Override
@@ -57,4 +59,5 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public Page<Enrollment> getEnrollmentsPage(Pageable pageable) {
         return enrollmentRepository.findAll(pageable);
     }
+}
 }

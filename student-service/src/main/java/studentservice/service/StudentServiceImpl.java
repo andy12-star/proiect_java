@@ -9,13 +9,12 @@ import studentservice.entity.Student;
 import studentservice.repository.StudentRepository;
 
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class StudentServiceImpl implements StudentService {
 
-    public final StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Override
     public List<Student> getAllStudents() {
@@ -25,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentById(Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student with id " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
     @Override
@@ -35,13 +34,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudent(Long id, Student student) {
-        Student updated = getStudentById(id);
-        updated.setFirstName(student.getFirstName());
-        updated.setLastName(student.getLastName());
-        updated.setEmail(student.getEmail());
-        updated.setStudyYear(student.getStudyYear());
-        updated.setSpecialization(student.getSpecialization());
-        return studentRepository.save(updated);
+        Student existing = getStudentById(id);
+        existing.setYear(student.getYear());
+        existing.setSpecialization(student.getSpecialization());
+        return studentRepository.save(existing);
     }
 
     @Override

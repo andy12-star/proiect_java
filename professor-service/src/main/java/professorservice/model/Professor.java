@@ -1,23 +1,25 @@
 package professorservice.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import userservice.model.User;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Entity
 @Table(name = "professors")
-public class Professor extends User {
-    @NotBlank
+public class Professor {
+
+    @Id
+    private Long id; // sincronizat cu `User` din auth-service
+
+    @NotBlank(message = "Department is required")
     private String department;
 }

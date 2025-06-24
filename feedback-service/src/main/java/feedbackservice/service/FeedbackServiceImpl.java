@@ -1,19 +1,21 @@
 package feedbackservice.service;
 
+import feedbackservice.model.AddFeedbackRequest;
 import feedbackservice.model.Feedback;
-import feedbackservice.model.FeedbackRequest;
 import feedbackservice.repository.FeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/feedbacks")
 @RequiredArgsConstructor
 @Slf4j
-@Service
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
@@ -24,7 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public Feedback addFeedback(FeedbackRequest request) {
+    public Feedback addFeedback(AddFeedbackRequest request) {
         Feedback feedback = Feedback.builder()
                 .studentId(request.getStudentId())
                 .courseId(request.getCourseId())
@@ -35,13 +37,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public List<Feedback> getFeedbackForCourse(Long courseId) {
-        return feedbackRepository.findByCourseId(courseId);
+    public List<Feedback> getFeedbackByStudent(Long studentId) {
+        return feedbackRepository.findByStudentId(studentId);
     }
 
     @Override
-    public List<Feedback> getFeedbackByStudent(Long studentId) {
-        return feedbackRepository.findByStudentId(studentId);
+    public List<Feedback> getFeedbackForCourse(Long courseId) {
+        return feedbackRepository.findByCourseId(courseId);
     }
 
     @Override

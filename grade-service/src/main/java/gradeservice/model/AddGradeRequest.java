@@ -1,13 +1,12 @@
-package feedbackservice.model;
+package gradeservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class FeedbackRequest {
+public class AddGradeRequest {
     private Long studentId;
     private Long courseId;
-    private String comment;
-    private Integer rating;
+    private Double grade;
 }

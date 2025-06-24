@@ -1,27 +1,29 @@
 package studentservice.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import org.hibernate.validator.constraints.Range;
-import userservice.model.User;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Entity
 @Table(name = "students")
-public class Student extends User {
-    @Range(min = 1, max = 5)
+public class Student {
+
+    @Id
+    private Long id;
+
+    @NotNull(message = "Current year is required")
     private int year;
 
-    @NotBlank
+    @NotBlank(message = "Specialization is required")
     private String specialization;
 }

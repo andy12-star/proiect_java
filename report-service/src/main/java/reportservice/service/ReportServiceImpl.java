@@ -1,60 +1,65 @@
 package reportservice.service;
 
-import courseservice.model.Course;
-import courseservice.repository.CourseRepository;
-import enrollmentservice.repository.EnrollmentRepository;
-import gradeservice.model.Grade;
-import gradeservice.repository.GradeRepository;
+
+import courseservice.model.dto.CourseDto;
+import gradeservice.model.GradeDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reportservice.client.CourseClient;
+import reportservice.client.GradeClient;
+import reportservice.client.StudentClient;
 import reportservice.model.CourseReportDTO;
 import reportservice.model.StudentReportDTO;
-import studentservice.entity.Student;
-import studentservice.repository.StudentRepository;
+import studentservice.entity.dto.StudentDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReportServiceImpl implements ReportService {
 
-    private final EnrollmentRepository enrollmentRepository;
-    private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
-    private final GradeRepository gradeRepository;
+    private final GradeClient gradeClient;
+    private final StudentClient studentClient;
+    private final CourseClient courseClient;
 
     @Override
     public StudentReportDTO generateStudentReport(Long studentId) {
-        Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+        StudentDto student = studentClient.getStudentById(studentId);
+        List<GradeDto> grades = gradeClient.getGradesByStudent(studentId);
 
-        List<Grade> grades = gradeRepository.findByStudentId(studentId);
-        List<String> courseNames = grades.stream().map(grade -> grade.getCourse().getCourseName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
+        List<String> courseNames = grades.stream()
+                .map(grade -> courseClient.getCourseById(grade.getCourseId()).getCourseName())
+                .toList();
 
-        return new StudentReportDTO(
-                student.getFirstName() + " " + student.getLastName(),
-                student.getEmail(),
-                courseNames,
-                gradeValues
-        );
+        List<Double> gradeValues = grades.stream().map(GradeDto::getGrade).toList();
+
+        return StudentReportDTO.builder()
+                .studentName(student.getFirstName() + " " + student.getLastName())
+                .email(student.getEmail())
+                .courseNames(courseNames)
+                .grades(gradeValues)
+                .build();
     }
-
 
     @Override
     public CourseReportDTO generateCourseReport(Long courseId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+        CourseDto course = courseClient.getCourseById(courseId);
+        List<GradeDto> grades = gradeClient.getGradesByCourse(courseId);
 
-        List<Grade> grades = gradeRepository.findByCourseId(courseId);
-        List<String> studentNames = grades.stream().map(grade -> grade.getStudent().getFirstName() + " " + grade.getStudent().getLastName()).collect(Collectors.toList());
-        List<Double> gradeValues = grades.stream().map(Grade::getGrade).collect(Collectors.toList());
+        List<String> studentNames = grades.stream()
+                .map(g -> {
+                    StudentDto s = studentClient.getStudentById(g.getStudentId());
+                    return s.getFirstName() + " " + s.getLastName();
+                }).toList();
 
-        return new CourseReportDTO(
-                course.getCourseName(),
-                studentNames,
-                gradeValues
-        );
+        List<Double> gradeValues = grades.stream().map(GradeDto::getGrade).toList();
+
+        return CourseReportDTO.builder()
+                .courseName(course.getCourseName())
+                .studentNames(studentNames)
+                .grades(gradeValues)
+                .build();
     }
 }

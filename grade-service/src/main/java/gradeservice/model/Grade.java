@@ -15,11 +15,15 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 @Table(name = "grades")
 public class Grade {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "studentId is required")
     private Long studentId;
+
+    @NotNull(message = "courseId is required")
     private Long courseId;
 
     @NotNull(message = "grade value is required")

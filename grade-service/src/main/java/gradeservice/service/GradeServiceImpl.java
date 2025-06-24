@@ -1,17 +1,19 @@
 package gradeservice.service;
 
+import gradeservice.model.AddGradeRequest;
 import gradeservice.model.Grade;
-import gradeservice.model.GradeRequest;
 import gradeservice.repository.GradeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class GradeServiceImpl implements GradeService {
 
     private final GradeRepository gradeRepository;
@@ -24,11 +26,11 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Grade getGradeById(Long id) {
         return gradeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Could not find grade with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Grade not found"));
     }
 
     @Override
-    public Grade addGrade(GradeRequest request) {
+    public Grade addGrade(AddGradeRequest request) {
         Grade grade = Grade.builder()
                 .studentId(request.getStudentId())
                 .courseId(request.getCourseId())

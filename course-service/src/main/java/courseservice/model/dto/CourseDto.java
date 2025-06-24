@@ -3,8 +3,7 @@ package courseservice.model.dto;
 import lombok.Data;
 
 @Data
-public class CourseRequest {
+public class CourseDto {
+    private Long id;
     private String courseName;
-    private Integer credits;
-    private long professorId;
 }

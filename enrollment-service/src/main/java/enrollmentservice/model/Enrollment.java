@@ -9,20 +9,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "enrollments")
 public class Enrollment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "student is required")
+    @NotNull(message = "studentId is required")
     private Long studentId;
 
-    @NotNull(message = "course is required")
+    @NotNull(message = "courseId is required")
     private Long courseId;
 
     @NotBlank(message = "status is required")
