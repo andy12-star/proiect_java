@@ -1,12 +1,12 @@
 server:
-  port: 8082
+  port: 8084
 
 spring:
   application:
-    name: professor-service
+    name: course-service
 
   datasource:
-    url: jdbc:h2:mem:studentdb
+    url: jdbc:h2:mem:enorllmentdb
     driver-class-name: org.h2.Driver
     username: sa
     password:

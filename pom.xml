@@ -20,8 +20,8 @@
         <module>professor-service</module>
         <module>report-service</module>
         <module>student-service</module>
-        <module>user-serv</module>
         <module>auth-service</module>
+        <module>common-dto</module>
 
     </modules>
 

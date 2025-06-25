@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     @Override
     public User registerUser(RegisterRequest request) {
         log.info("Registering user: {}", request);
@@ -48,6 +47,8 @@ public class UserServiceImpl implements UserService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
+        log.info("Saving user: {}", user);
+
         return userRepository.save(user);
     }
 

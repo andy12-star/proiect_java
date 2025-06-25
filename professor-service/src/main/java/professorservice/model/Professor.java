@@ -1,8 +1,6 @@
 package professorservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +16,8 @@ import lombok.NoArgsConstructor;
 public class Professor {
 
     @Id
-    private Long id; // sincronizat cu `User` din auth-service
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Department is required")
     private String department;

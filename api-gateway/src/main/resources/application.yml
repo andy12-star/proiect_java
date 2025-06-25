@@ -1,3 +1,70 @@
+#server:
+#  port: 8080
+#
+#spring:
+#  application:
+#    name: api-gateway
+#
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+#
+#      routes:
+#        - id: student-service
+#          uri: lb://student-service
+#          predicates:
+#            - Path=/students/**
+#
+#        - id: course-service
+#          uri: lb://course-service
+#          predicates:
+#            - Path=/courses/**
+#
+#        - id: professor-service
+#          uri: lb://professor-service
+#          predicates:
+#            - Path=/professors/**
+#
+#        - id: enrollment-service
+#          uri: lb://enrollment-service
+#          predicates:
+#            - Path=/enrollments/**
+#
+#        - id: grade-service
+#          uri: lb://grade-service
+#          predicates:
+#            - Path=/grades/**
+#
+#        - id: feedback-service
+#          uri: lb://feedback-service
+#          predicates:
+#            - Path=/feedbacks/**
+#
+#        - id: auth-service
+#          uri: lb://auth-service
+#          predicates:
+#            - Path=/auth/**
+#
+#        - id: report-service
+#          uri: lb://report-service
+#          predicates:
+#            - Path=/reports/**
+#
+#  main:
+#    allow-bean-definition-overriding: true
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+
 server:
   port: 8080
 
@@ -6,9 +73,6 @@ spring:
     name: api-gateway
 
   cloud:
-    config:
-      uri: http://localhost:8888
-
     gateway:
       discovery:
         locator:
@@ -16,20 +80,25 @@ spring:
           lower-case-service-id: true
 
       routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
         - id: student-service
           uri: lb://student-service
           predicates:
             - Path=/students/**
 
-        - id: course-service
-          uri: lb://course-service
-          predicates:
-            - Path=/courses/**
-
         - id: professor-service
           uri: lb://professor-service
           predicates:
             - Path=/professors/**
+
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/courses/**
 
         - id: enrollment-service
           uri: lb://enrollment-service
@@ -46,20 +115,18 @@ spring:
           predicates:
             - Path=/feedbacks/**
 
-        - id: auth-service
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/**
-
         - id: report-service
           uri: lb://report-service
           predicates:
             - Path=/reports/**
 
-  main:
-    allow-bean-definition-overriding: true
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
