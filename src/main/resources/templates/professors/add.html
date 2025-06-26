@@ -25,7 +25,8 @@
     <label>Department:
         <input type="text" th:field="*{department}"/>
     </label><br/>
-
+    <!-- Rolul STUDENT - ascuns -->
+    <input type="hidden" name="role" value="PROFESSOR"/>
     <button type="submit">Add</button>
 </form>
 <a th:href="@{/view/professors}">Back to list</a>

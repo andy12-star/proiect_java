@@ -29,7 +29,8 @@
     <label>Year:
         <input type="number" th:field="*{year}"/>
     </label><br/>
-
+    <!-- Rolul STUDENT - ascuns -->
+    <input type="hidden" name="role" value="STUDENT"/>
     <button type="submit">Add</button>
 </form>
 <a th:href="@{/view/students}">Back to list</a>

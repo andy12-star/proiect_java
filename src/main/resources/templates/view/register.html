@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h2>Register</h2>
+
+<form th:action="@{/view/perform_register}" th:object="${registerRequest}" method="post">
+
+    <label>First Name:</label>
+    <input type="text" th:field="*{firstName}" required/><br/>
+
+    <label>Last Name:</label>
+    <input type="text" th:field="*{lastName}" required/><br/>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required/><br/>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}" required/><br/>
+
+    <label>Role:</label>
+    <select th:field="*{role}">
+        <option value="STUDENT">Student</option>
+        <option value="PROFESSOR">Professor</option>
+    </select><br/>
+
+    <label>Year (pentru Student):</label>
+    <input type="number" min="1" max="5" th:field="*{year}"/><br/>
+
+    <label>Specialization (pentru Student):</label>
+    <input type="text" th:field="*{specialization}"/><br/>
+
+    <label>Department (pentru Professor):</label>
+    <input type="text" th:field="*{department}"/><br/>
+
+    <button type="submit">Register</button>
+</form>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<a th:href="@{/view/login}">Back to login</a>
+</body>
+</html>
