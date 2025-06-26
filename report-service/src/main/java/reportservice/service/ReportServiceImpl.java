@@ -1,28 +1,27 @@
 package reportservice.service;
 
-
-import courseservice.model.dto.CourseDto;
-import gradeservice.model.GradeDto;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reportservice.client.CourseClient;
 import reportservice.client.GradeClient;
 import reportservice.client.StudentClient;
-import reportservice.model.CourseReportDTO;
-import reportservice.model.StudentReportDTO;
-import studentservice.entity.dto.StudentDto;
+import reportservice.model.*;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class ReportServiceImpl implements ReportService {
 
     private final GradeClient gradeClient;
     private final StudentClient studentClient;
     private final CourseClient courseClient;
+
+    public ReportServiceImpl(GradeClient gradeClient, StudentClient studentClient, CourseClient courseClient) {
+        this.gradeClient = gradeClient;
+        this.studentClient = studentClient;
+        this.courseClient = courseClient;
+    }
 
     @Override
     public StudentReportDTO generateStudentReport(Long studentId) {
@@ -34,13 +33,9 @@ public class ReportServiceImpl implements ReportService {
                 .toList();
 
         List<Double> gradeValues = grades.stream().map(GradeDto::getGrade).toList();
-
-        return StudentReportDTO.builder()
-                .studentName(student.getFirstName() + " " + student.getLastName())
-                .email(student.getEmail())
-                .courseNames(courseNames)
-                .grades(gradeValues)
-                .build();
+        StudentReportDTO studentReportDTO = new StudentReportDTO(student.getFirstName() + " " + student.getLastName(), student.getEmail(),
+                courseNames, gradeValues);
+        return studentReportDTO;
     }
 
     @Override
@@ -55,11 +50,7 @@ public class ReportServiceImpl implements ReportService {
                 }).toList();
 
         List<Double> gradeValues = grades.stream().map(GradeDto::getGrade).toList();
-
-        return CourseReportDTO.builder()
-                .courseName(course.getCourseName())
-                .studentNames(studentNames)
-                .grades(gradeValues)
-                .build();
+        CourseReportDTO courseReportDTO = new CourseReportDTO(course.getCourseName(), studentNames, gradeValues);
+        return courseReportDTO;
     }
 }

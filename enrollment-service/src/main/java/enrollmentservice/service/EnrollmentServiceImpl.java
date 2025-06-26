@@ -2,7 +2,6 @@ package enrollmentservice.service;
 
 import enrollmentservice.model.Enrollment;
 import enrollmentservice.repository.EnrollmentRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,11 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     private final EnrollmentRepository enrollmentRepository;
+
+    public EnrollmentServiceImpl(EnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
 
     @Override
     public List<Enrollment> getAllEnrollments() {
@@ -47,11 +49,10 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public Enrollment enrollStudent(Long studentId, Long courseId) {
-        Enrollment enrollment = Enrollment.builder()
-                .studentId(studentId)
-                .courseId(courseId)
-                .status("Pending")
-                .build();
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudentId(studentId);
+        enrollment.setCourseId(courseId);
+        enrollment.setStatus("Pending");
         return enrollmentRepository.save(enrollment);
     }
 

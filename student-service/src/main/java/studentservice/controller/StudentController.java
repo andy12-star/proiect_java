@@ -2,8 +2,8 @@ package studentservice.controller;
 
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +17,16 @@ import studentservice.service.StudentService;
 import java.util.List;
 @RestController
 @RequestMapping("/students")
-@RequiredArgsConstructor
 @Slf4j
 public class StudentController {
 
     private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {

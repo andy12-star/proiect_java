@@ -10,4 +10,20 @@ import org.springframework.context.annotation.Configuration;
 public class JwtConfig {
     private String secret;
     private Long expirationTime;
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public Long getExpirationTime() {
+        return expirationTime;
+    }
+
+    public void setExpirationTime(Long expirationTime) {
+        this.expirationTime = expirationTime;
+    }
 }

@@ -3,7 +3,6 @@ package feedbackservice.service;
 import feedbackservice.model.AddFeedbackRequest;
 import feedbackservice.model.Feedback;
 import feedbackservice.repository.FeedbackRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +13,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/feedbacks")
-@RequiredArgsConstructor
+
 @Slf4j
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
+
+    public FeedbackServiceImpl(FeedbackRepository feedbackRepository) {
+        this.feedbackRepository = feedbackRepository;
+    }
 
     @Override
     public List<Feedback> getAllFeedbacks() {
@@ -27,12 +30,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public Feedback addFeedback(AddFeedbackRequest request) {
-        Feedback feedback = Feedback.builder()
-                .studentId(request.getStudentId())
-                .courseId(request.getCourseId())
-                .comment(request.getComment())
-                .rating(request.getRating())
-                .build();
+        Feedback feedback = new Feedback();
+        feedback.setStudentId(request.getStudentId());
+        feedback.setCourseId(request.getCourseId());
+        feedback.setComment(request.getComment());
+        feedback.setRating(request.getRating());
         return feedbackRepository.save(feedback);
     }
 

@@ -2,7 +2,6 @@ package courseservice.service;
 
 import courseservice.model.Course;
 import courseservice.repository.CourseRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,11 +10,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+
+    public CourseServiceImpl(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     @Override
     public List<Course> getAllCourses() {

@@ -4,7 +4,6 @@ import courseservice.model.Course;
 import courseservice.model.dto.CreateCourseRequest;
 import courseservice.service.CourseService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,11 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/courses")
-@RequiredArgsConstructor
 @Slf4j
 public class CourseController {
 
     private final CourseService courseService;
+
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
@@ -37,11 +39,11 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<Course> addCourse(@RequestBody @Valid CreateCourseRequest req) {
-        Course course = Course.builder()
-                .courseName(req.getCourseName())
-                .credits(req.getCredits())
-                .professorId(req.getProfessorId())
-                .build();
+        Course course = new Course();
+        course.setCourseName(req.getCourseName());
+        course.setCredits(req.getCredits());
+        course.setProfessorId(req.getProfessorId());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.addCourse(course));
     }
 

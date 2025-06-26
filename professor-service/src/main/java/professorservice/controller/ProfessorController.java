@@ -2,7 +2,6 @@ package professorservice.controller;
 
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,12 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/professors")
-@RequiredArgsConstructor
 @Slf4j
 public class ProfessorController {
 
     private final ProfessorService professorService;
 
+    public ProfessorController(ProfessorService professorService) {
+        this.professorService = professorService;
+    }
     @GetMapping
     public ResponseEntity<List<Professor>> getAllProfessors() {
         return ResponseEntity.ok(professorService.getAllProfessors());

@@ -3,7 +3,6 @@ package feedbackservice.controller;
 import feedbackservice.model.AddFeedbackRequest;
 import feedbackservice.model.Feedback;
 import feedbackservice.service.FeedbackService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/feedbacks")
-@RequiredArgsConstructor
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
+
+    public FeedbackController(FeedbackService feedbackService) {
+        this.feedbackService = feedbackService;
+    }
 
     @PostMapping
     public ResponseEntity<Feedback> addFeedback(@RequestBody AddFeedbackRequest request) {

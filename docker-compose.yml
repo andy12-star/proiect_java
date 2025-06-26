@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+
+  discovery-service:
+    build: ./discovery-service
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "8088:8088"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  student-service:
+    build: ./student-service
+    container_name: student-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  professor-service:
+    build: ./professor-service
+    container_name: professor-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  course-service:
+    build: ./course-service
+    container_name: course-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  enrollment-service:
+    build: ./enrollment-service
+    container_name: enrollment-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  grade-service:
+    build: ./grade-service
+    container_name: grade-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - discovery-service
+      - auth-service
+      - enrollment-service
+      - config-server
+
+  report-service:
+    build: ./report-service
+    container_name: report-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  feedback-service:
+    build: ./feedback-service
+    container_name: feedback-service
+    ports:
+      - "8087:8087"
+    depends_on:
+      - config-server
+      - discovery-service
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config-server
+      - discovery-service
+      - auth-service
+      - student-service
+      - professor-service
+      - course-service
+      - enrollment-service
+      - report-service
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

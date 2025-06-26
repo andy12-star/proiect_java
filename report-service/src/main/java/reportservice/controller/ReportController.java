@@ -1,7 +1,5 @@
 package reportservice.controller;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +11,18 @@ import reportservice.service.ReportService;
 
 @RestController
 @RequestMapping("/reports")
-@RequiredArgsConstructor
-@Slf4j
 public class ReportController {
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ReportController.class);
 
     private final ReportService reportService;
 
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
+
     @GetMapping("/students/{studentId}")
     public ResponseEntity<StudentReportDTO> getStudentReport(@PathVariable Long studentId) {
-        log.info("GET /reports/students/{}", studentId);
         return ResponseEntity.ok(reportService.generateStudentReport(studentId));
     }
 

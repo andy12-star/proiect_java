@@ -4,7 +4,6 @@ import authservice.config.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -15,10 +14,15 @@ import java.util.List;
 import java.util.function.Function;
 
 @Component
-@RequiredArgsConstructor
+
 public class JwtUtil {
 
     private final JwtConfig jwtConfig;
+
+    public JwtUtil(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
+    }
+
 
     public String generateToken(String username, List<String> roles) {
         return Jwts.builder()

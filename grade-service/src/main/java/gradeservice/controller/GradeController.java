@@ -4,7 +4,6 @@ import gradeservice.model.AddGradeRequest;
 import gradeservice.model.Grade;
 import gradeservice.service.GradeService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,11 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/grades")
-@RequiredArgsConstructor
 @Slf4j
 public class GradeController {
 
     private final GradeService gradeService;
+
+    public GradeController(GradeService gradeService) {
+        this.gradeService = gradeService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Grade>> getAllGrades() {

@@ -2,7 +2,6 @@ package enrollmentservice.controller;
 
 import enrollmentservice.model.Enrollment;
 import enrollmentservice.service.EnrollmentService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,11 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/enrollments")
-@RequiredArgsConstructor
 @Slf4j
 public class EnrollmentController {
 
     private final EnrollmentService enrollmentService;
+
+    public EnrollmentController(EnrollmentService enrollmentService) {
+        this.enrollmentService = enrollmentService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Enrollment>> getAllEnrollments() {

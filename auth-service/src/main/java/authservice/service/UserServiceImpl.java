@@ -6,8 +6,8 @@ import authservice.entity.Professor;
 import authservice.entity.Student;
 import authservice.entity.User;
 import authservice.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +15,19 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+
+    }
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Override
     public User registerUser(RegisterRequest request) {
         log.info("Registering user: {}", request);

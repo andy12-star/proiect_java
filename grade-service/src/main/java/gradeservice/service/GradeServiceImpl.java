@@ -3,7 +3,6 @@ package gradeservice.service;
 import gradeservice.model.AddGradeRequest;
 import gradeservice.model.Grade;
 import gradeservice.repository.GradeRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +12,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+
 public class GradeServiceImpl implements GradeService {
 
     private final GradeRepository gradeRepository;
+
+    public GradeServiceImpl(GradeRepository gradeRepository) {
+        this.gradeRepository = gradeRepository;
+    }
 
     @Override
     public List<Grade> getAllGrades() {
@@ -31,11 +34,10 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade addGrade(AddGradeRequest request) {
-        Grade grade = Grade.builder()
-                .studentId(request.getStudentId())
-                .courseId(request.getCourseId())
-                .grade(request.getGrade())
-                .build();
+        Grade grade = new Grade();
+        grade.setGrade(request.getGrade());
+        grade.setStudentId(request.getStudentId());
+        grade.setCourseId(request.getCourseId());
         return gradeRepository.save(grade);
     }
 
