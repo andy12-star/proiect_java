@@ -6,9 +6,10 @@
 <body>
 <h2>Register</h2>
 
-<form th:action="@{/view/perform_register}" th:object="${registerRequest}" method="post">
+<form th:action="@{/perform_register}" th:object="${registerRequest}" method="post">
 
-    <label>First Name:</label>
+
+<label>First Name:</label>
     <input type="text" th:field="*{firstName}" required/><br/>
 
     <label>Last Name:</label>

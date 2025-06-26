@@ -85,7 +85,7 @@ public class AuthenticationController {
         jwtCookie.setPath("/");
         jwtCookie.setMaxAge(0);
         response.addCookie(jwtCookie);
-        return "redirect:/view/login?logout";
+        return "redirect:/view/logout";
 
     }
 
